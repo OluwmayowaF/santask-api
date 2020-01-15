@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-const express = require('express');
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-
-
-
-const app = express();
-
-app.listen(3000, ()=>{
-    console.log('Listening on Port 3000')
-=======
 require('dotenv').config();
 
 
@@ -54,5 +42,4 @@ db.on('error', err => {
 app.listen(`${stage.port}`,  ()=>{
   console.log(`Server now listening at localhost:${stage.port}`);
   console.log(`Server now listening at localhost:${environment}`);
->>>>>>> ch-setup-database-mongodb
 })
