@@ -11,7 +11,7 @@ const connUri = process.env.DB_CONN;
 const middleware = {
     validateToken: async (req, res, next) =>{
         const authorizationHeader = req.headers.authorization; 
-        let result; 
+        let result = {}; 
         if (authorizationHeader){
           const token = req.headers.authorization.split(' ')[1]; // Bearer <token>
             const options = {
@@ -59,7 +59,8 @@ const middleware = {
             }catch (err){
                 status = 500;
                 result.status = status; 
-                result.error = 'Something went wrong'; 
+                result.err = err;
+                result.error = 'Something went wrong while trying to connect'; 
                 res.status(status).send(result);
            }
             
