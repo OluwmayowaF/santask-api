@@ -5,7 +5,7 @@ const validateToken = require('../auth').validateToken;
 module.exports = (router) => {
     router.route('/tasks')
       .post(middleware.validateToken, middleware.adminRoute, controller.add)
-      .get(middleware.validateToken, controller.getTasks );
+      .get(middleware.validateToken, middleware.adminRoute, controller.getTasks );
 
     router.route('/mytasks')  
       .get(middleware.validateToken, controller.getUserTask );
