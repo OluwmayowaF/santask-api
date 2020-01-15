@@ -25,7 +25,7 @@ module.exports ={
                 user.save((err, user) => {
                     if(!err){
                         result.status = status; 
-                        result.result = user; 
+                        result.data = user; 
                     }else {
                         status = 500; 
                         result.status = status; 
@@ -65,7 +65,7 @@ module.exports ={
 
                                result.token = `Bearer ${token}`;
                                result.status = status; 
-                               result.result = user; 
+                               result.data = user; 
                            }else {
                                status = 401;
                                result.status = status; 
@@ -108,7 +108,7 @@ module.exports ={
                     if(!err && user){
                         
                         result.status = status; 
-                        result.result = user; 
+                        result.data = user; 
                     }else {
                         status = 500; 
                         result.status = status; 

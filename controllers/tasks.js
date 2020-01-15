@@ -23,8 +23,9 @@ module.exports = {
                         const task = new Task({owner, title, taskDetails, deadline }); 
                         task.save((err, task) => {
                             if(!err){
+                                result.message ='Task Has been Added Successfully';
                                 result.status = status; 
-                                result.result = task; 
+                                result.data = task; 
                             }else {
                                 status = 500; 
                                 result.status = status; 
@@ -61,9 +62,9 @@ module.exports = {
 
                 Task.find({owner:owner}, (err, task) => {
                     if(!err && task){
-                        
+                        result.message ='All Tasks assigned to logged in User'
                         result.status = status; 
-                        result.result = task; 
+                        result.data = task; 
                     }else {
                         status = 500; 
                         result.status = status; 
@@ -96,9 +97,9 @@ module.exports = {
 
                 Task.find({}, (err, task) => {
                     if(!err && task){
-                        
+                        result.message = 'All Tasks'
                         result.status = status; 
-                        result.result = task; 
+                        result.data = task; 
                     }else {
                         status = 500; 
                         result.status = status; 
@@ -140,8 +141,9 @@ module.exports = {
                            
 
                         }else{
+                            result.message = 'Selected Task Details'
                             result.status = status; 
-                            result.result = task; 
+                            result.data = task; 
                         }
                         
                     }else {
