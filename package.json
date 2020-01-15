@@ -1,42 +1,43 @@
 {
-  "name": "santask-api",
-  "version": "1.0.0",
-  "description": "API for a task Management application",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/OluwmayowaF/santask-api.git"
-  },
-  "keywords": [
-    "node",
-    "mongodb",
-    "mongoose"
-  ],
-  "author": "Oluwamayowa Fadairo",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/OluwmayowaF/santask-api/issues"
-  },
-  "homepage": "https://github.com/OluwmayowaF/santask-api#readme",
-  "devDependencies": {
-    "cross-env": "^6.0.3",
-    "eslint": "^6.8.0",
-    "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.19.1",
-    "morgan": "^1.9.1",
-    "nodemon": "^2.0.2"
-  },
-  "dependencies": {
-    "bcrypt": "^3.0.7",
-    "body-parser": "^1.19.0",
-    "chai": "^4.2.0",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1",
-    "mocha": "^7.0.0",
-    "mongoose": "^5.8.5"
-  }
+    "name": "santask-api",
+    "version": "1.0.0",
+    "description": "API for a task Management application",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "cross-env NODE_ENV=development nodemon index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/OluwmayowaF/santask-api.git"
+    },
+    "keywords": [
+        "node",
+        "mongodb",
+        "mongoose"
+    ],
+    "author": "Oluwamayowa Fadairo",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/OluwmayowaF/santask-api/issues"
+    },
+    "homepage": "https://github.com/OluwmayowaF/santask-api#readme",
+    "devDependencies": {
+        "cross-env": "^6.0.3",
+        "eslint": "^6.8.0",
+        "eslint-config-airbnb-base": "^14.0.0",
+        "eslint-plugin-import": "^2.19.1",
+        "morgan": "^1.9.1",
+        "nodemon": "^2.0.2"
+    },
+    "dependencies": {
+        "bcrypt": "^3.0.7",
+        "body-parser": "^1.19.0",
+        "chai": "^4.2.0",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "jsonwebtoken": "^8.5.1",
+        "mocha": "^7.0.0",
+        "mongoose": "^5.8.5"
+    }
 }
