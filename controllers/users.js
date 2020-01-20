@@ -221,7 +221,7 @@ module.exports ={
 
         mongoose.connect(connUri, { useUnifiedTopology: true, useNewUrlParser : true, useCreateIndex: true,}, (err) =>{
             if(!err){
-                let username = req.param.user;
+                let username = req.params.user;
                 User.findOneAndDelete({username}, (err, user) => {
                     if(!err && user){
                         result.status = status; 
