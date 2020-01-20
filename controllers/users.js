@@ -16,6 +16,8 @@ module.exports ={
 
             if(!err){
                 let {fullname, username, email, password, role } = req.body;
+                username = username.toLowerCase();
+                email = email.toLowerCase();
                 password = helper.hashPassword(password);
                
                 const user = new User({fullname, username, email, password, role }); 
@@ -46,7 +48,8 @@ module.exports ={
     },
 
     login: (req, res) => {
-        const {username, email, password} = req.body;
+        let {username, email, password} = req.body;
+        
 
         mongoose.connect(connUri, {useUnifiedTopology: true, useNewUrlParser : true}, (err) => {
             let result = {};
