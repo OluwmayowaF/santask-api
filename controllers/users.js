@@ -113,13 +113,17 @@ module.exports ={
                         result.status = status; 
                         result.data = user; 
                     }else {
-                        status = 500; 
+                        status = 404; 
                         result.status = status; 
-                        result.error = err;
-                        result.message='Something Went wrong please try again'
+                        result.message='No users found'
                     }
                     res.status(status).send(result);
 
+                }).catch(err => {
+                    status = 500;
+                    result.status = status; 
+                    result.error = err;
+                    res.status(status).send(result);
                 });
 
             }else{
@@ -131,7 +135,257 @@ module.exports ={
             }
         });
 
-    }
+    },
+
+    loggedInUser: (req, res) => {
+        let status = 200; 
+        let result ={};
+
+        mongoose.connect(connUri, { useUnifiedTopology: true, useNewUrlParser : true, useCreateIndex: true,}, (err) =>{
+            if(!err){
+                let username = req.result.user;
+                User.findOne({username}, (err, user) => {
+                    if(!err && user){
+                        result.status = status; 
+                        result.data = user;
+
+                    }else {
+                        status = 404; 
+                        result.status = status; 
+                        result.message='User not found'
+                    }
+                    res.status(status).send(result);
+
+                }).catch(err => {
+                    status = 500;
+                    result.status = status; 
+                    result.error = err;
+                    res.status(status).send(result);
+                });
+
+            }else{
+                status = 500;
+                result.status = status;
+                result.error = err;
+                result.message='Something Went wrong please try again'
+                res.status(status).send(result); 
+
+            }
+
+        });
+    },
+
+
+    loggedInUserDeleteAccount: (req, res) => {
+        let status = 200; 
+        let result ={};
+
+        mongoose.connect(connUri, { useUnifiedTopology: true, useNewUrlParser : true, useCreateIndex: true,}, (err) =>{
+            if(!err){
+                let username = req.result.user;
+                User.findOneAndDelete({username}, (err, user) => {
+                    if(!err && user){
+                        result.status = status; 
+                        result.data = user;
+                        result.message ="User Account deleted(Log user out)"
+
+                    }else {
+                        status = 404; 
+                        result.status = status; 
+                        result.message='User not found'
+                    }
+                    res.status(status).send(result);
+
+                }).catch(err => {
+                    status = 500;
+                    result.status = status; 
+                    result.error = err;
+                    res.status(status).send(result);
+                });
+
+            }else{
+                status = 500;
+                result.status = status;
+                result.error = err;
+                result.message='Something Went wrong please try again'
+                res.status(status).send(result); 
+
+            }
+
+        });
+    },
+
+    adminDeleteUser: (req, res) => {
+        let status = 200; 
+        let result ={};
+
+        mongoose.connect(connUri, { useUnifiedTopology: true, useNewUrlParser : true, useCreateIndex: true,}, (err) =>{
+            if(!err){
+                let username = req.param.username;
+                User.findOneAndDelete({username}, (err, user) => {
+                    if(!err && user){
+                        result.status = status; 
+                        result.data = user;
+                        result.message='User has been deleted succesfully'
+
+                    }else {
+                        status = 404; 
+                        result.status = status; 
+                        result.message='User not found'
+                    }
+                    res.status(status).send(result);
+
+                }).catch(err => {
+                    status = 500;
+                    result.status = status; 
+                    result.error = err;
+                    res.status(status).send(result);
+                });
+
+            }else{
+                status = 500;
+                result.status = status;
+                result.error = err;
+                result.message='Something Went wrong please try again'
+                res.status(status).send(result); 
+
+            }
+
+        });
+
+
+    },
    
+    updateUserInfo: (req, res) => {
+        let status = 200; 
+        let result ={};
+
+        mongoose.connect(connUri, { useUnifiedTopology: true, useNewUrlParser : true, useCreateIndex: true,}, (err) =>{
+            if(!err){
+                let username = req.result.user;
+                let {fullname, password} = req.body;
+               
+                User.find({username}, (err, user) => {
+                    if(!err && user){
+                        fullname ? fullname : user.fullname;
+                        password ? password = helper.hashPassword(password): user.password;
+                        User.findOneAndUpdate({username}, {$set:{fullname: fullname, password:password}}, {new: true}, (err, user) => {
+                            result.status = status; 
+                            result.data = user;
+                            result.message = `User ${username} updated successfully`;
+                            res.status(status).send(result);
+
+                        }).catch(err => {
+                            status = 500;
+                            result.status = status; 
+                            result.error = err;
+                            res.status(status).send(result);
+                        });
+                       
+
+                    }else {
+                        status = 404; 
+                        result.status = status; 
+                        result.message='User not found'
+                        res.status(status).send(result);
+                    }
+                   
+
+                }).catch(err => {
+                    status = 500;
+                    result.status = status; 
+                    result.error = err;
+                    res.status(status).send(result);
+                });
+
+            }else{
+                status = 500;
+                result.status = status;
+                result.error = err;
+                result.message='Something Went wrong please try again'
+                res.status(status).send(result); 
+
+            }
+
+        });
+
+    },
+
+    viewUser: (req, res) => {
+        let status = 200; 
+        let result ={};
+
+        mongoose.connect(connUri, { useUnifiedTopology: true, useNewUrlParser : true, useCreateIndex: true,}, (err) =>{
+            if(!err){
+                let username = req.params.user;
+                User.findOne({username}, (err, user) => {
+                    if(!err && user){
+                        result.status = status; 
+                        result.data = user;
+
+                    }else {
+                        status = 404; 
+                        result.status = status; 
+                        result.message='User not found'
+                    }
+                    res.status(status).send(result);
+
+                }).catch(err => {
+                    status = 500;
+                    result.status = status; 
+                    result.error = err;
+                    res.status(status).send(result);
+                });
+
+            }else{
+                status = 500;
+                result.status = status;
+                result.error = err;
+                result.message='Something Went wrong please try again'
+                res.status(status).send(result); 
+
+            }
+
+        });
+    },
+
+    searchUser: (req, res) => {
+        let status = 200; 
+        let result ={};
+
+        mongoose.connect(connUri, { useUnifiedTopology: true, useNewUrlParser : true, useCreateIndex: true,}, (err) =>{
+            if(!err){
+                let username = req.params.user;
+                User.find({username: new RegExp(username, 'i') }, (err, users) => {
+                    if(!err && users){
+                        result.status = status; 
+                        result.data = users;
+
+                    }else {
+                        status = 404; 
+                        result.status = status; 
+                        result.message='User not found'
+                    }
+                    res.status(status).send(result);
+
+                }).catch(err => {
+                    status = 500;
+                    result.status = status; 
+                    result.error = err;
+                    res.status(status).send(result);
+                });
+
+            }else{
+                status = 500;
+                result.status = status;
+                result.error = err;
+                result.message='Something Went wrong please try again'
+                res.status(status).send(result); 
+
+            }
+
+        });
+    },
+
 
 }
