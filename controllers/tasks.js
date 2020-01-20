@@ -15,6 +15,7 @@ module.exports = {
 
             if(!err){
                 let {owner, title, taskDetails, deadline} = req.body;
+                owner = owner.toLowerCase()
                 let username = req.body.owner;
 
                 //Find Owner 
@@ -58,7 +59,7 @@ module.exports = {
         mongoose.connect(connUri, { useUnifiedTopology: true, useNewUrlParser : true, useCreateIndex: true,}, (err)=> {
             if(!err){
                 //find task
-                owner = req.result.user;
+                let owner = req.result.user;
 
                 Task.find({owner:owner}, (err, task) => {
                     if(!err && task){
@@ -93,7 +94,7 @@ module.exports = {
         mongoose.connect(connUri, { useUnifiedTopology: true, useNewUrlParser : true, useCreateIndex: true,}, (err)=> {
             if(!err){
                 //find task
-                owner = req.result.user;
+              // let owner = req.result.user;
 
                 Task.find({}, (err, task) => {
                     if(!err && task){
@@ -128,9 +129,9 @@ module.exports = {
         mongoose.connect(connUri, { useUnifiedTopology: true, useNewUrlParser : true, useCreateIndex: true,}, (err)=> {
             if(!err){
                 //find task
-                id = req.params.id;
-                owner = req.result.user;
-                role = req.result.role;
+                let id = req.params.id;
+                let owner = req.result.user;
+                let role = req.result.role;
 
                 Task.findById(id, (err, task) => {
                     if(!err && task){
@@ -175,9 +176,10 @@ module.exports = {
         mongoose.connect(connUri, { useUnifiedTopology: true, useNewUrlParser : true, useCreateIndex: true,}, (err)=> {
             if(!err){
                 //find task
-                id = req.params.id;
-                owner = req.result.user;
-                role = req.result.role;
+                let id = req.params.id;
+                let owner = req.result.user;
+                let role = req.result.role;
+                status = status.toLowerCase();
 
                 Task.findById(id,  (err, tasks) => {
                     if(!err && tasks){
@@ -189,12 +191,12 @@ module.exports = {
                             
 
                         }else{
-                            Task.updateOne({status: status},  (err, task) => {
-                               if(task){
-                                status_code = 200; 
-                        result.status = status_code; 
+                            Task.findOneAndUpdate({_id:id}, {$set: {status:status}}, {new: true}, (err, updatedTask) => {
+                               if(updatedTask){
+                                status_code = 201; 
+                                result.status = status_code; 
                                 result.message = 'Task Has been updated succesfully'; 
-                                result.task =tasks;
+                                result.task =updatedTask;
                                 //res.status(status_code).send(result);
 
 
