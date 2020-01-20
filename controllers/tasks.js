@@ -31,7 +31,7 @@ module.exports = {
                                 status = 500; 
                                 result.status = status; 
                                 result.error = err;
-                                result.message='Internal server error'
+                                result.message='Something went wrong please try again'
                             }
                             res.status(status).send(result);
                         });

@@ -1,8 +1,5 @@
 const mongoose = require('mongoose'); 
-//const bcypt = require('bcrypt');
 
-//const environment = process.env.NODE_ENV;
-//const stage = require('../config')[environment]; 
 
 let userSchema = new mongoose.Schema({
         fullname:  {
